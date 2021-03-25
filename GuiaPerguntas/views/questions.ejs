@@ -1,0 +1,27 @@
+<%- include('./components/header.ejs') %>
+<body>
+    <%- include('./components/navbar.ejs') %>
+    <div class="container">
+        <div class="card" id="form-question">
+            <div class="card-header">
+                <h3>Ask question</h3>
+                <hr>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="/savequestion">
+                    <label>Name</label>
+                    <input type="text" placeholder="Name"  name="name" class="form-control">
+                    <br>
+                    <label>Title</label>
+                    <input type="text" placeholder="Title" class="form-control" name="title">
+                    </br>
+                    <label>Description</label>
+                    <textarea placeholder="Describe your question" class="form-control" name="description"></textarea>
+                    </br>
+                    <button class="btn btn-primary">To ask</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('./components/footer.ejs') %>

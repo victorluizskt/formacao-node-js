@@ -1,0 +1,45 @@
+<%- include('./components/header.ejs') %>
+<body>
+    <%- include('./components/navbar.ejs') %>
+    <div class="container">
+        <br>
+        <%- include('./components/carousel.ejs') %>
+        <hr>
+        <p>
+            
+            <div style="text-align: center;">
+                <a href="https://www.linkedin.com/in/victor-luiz-3913271a7" target="_new">
+                    <img  width="100" height="100" src="/img/eu.jpg" class="rounded-circle" alt="...">
+                </a>
+                <p>
+                    Graduando em Engenharia de Computação pelo <strong>CEFET-MG</strong>
+                </p>
+                <p>
+                    Apaixonado por tecnologia e inovação, atualmente estudando Node.js e JavaScript.
+                </p>
+                <p>
+                    <img width="160" height="100" src="/img/node.png" alt="...">
+                    <img width="100" height="100" src="/img/js.png" alt="...">
+                </p>
+                <hr>
+            </div>
+                       
+        </p>
+        <br>
+        <% questions.forEach(question => { %>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <h4><p><%= question.title %> </p></h4>
+                    <p>Created by: <%= question.name %></p>
+                    <p><%= question.createdAt.toString() %></p>
+                </div>
+                <div class="card-footer">
+                    <a href="question/<%= question.id %>"><button class="btn btn-primary">Reply</button></a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</body>
+<%- include('./components/footer.ejs') %>

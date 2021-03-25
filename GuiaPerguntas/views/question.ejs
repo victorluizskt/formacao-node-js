@@ -1,0 +1,34 @@
+<%- include('./components/header.ejs') %>
+<body >
+    <%- include('./components/navbar.ejs') %>
+
+    <div class="container">
+        <hr>
+        <h1><%= question.title %></h1>
+        <p><%= question.description %></p>
+        <hr>
+        <form method="POST" action="/response">
+            <h3>Reply</h3>
+            <input name="name" placeholder="Enter yout name" class="form-control" type="text">
+            <br>
+            <textarea placeholder="Enter your Reply" class="form-control" name="corpo"></textarea><br>
+            <input type="hidden" name="question" value="<%= question.id %>">
+            <button type="submit" class="btn btn-primary">Reply</button>
+        </form>
+        <hr>
+        <h3>Answers</h3>
+        <hr>
+        <% responses.forEach(response => { %>
+            <br>
+            <div class="card">
+                <div class="card-body">
+                    <p><%= response.name %></p>
+                    <p><%= response.corpo %></p>
+                    <p><%= response.createdAt %></p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</body>
+<%- include('./components/footer.ejs') %>
