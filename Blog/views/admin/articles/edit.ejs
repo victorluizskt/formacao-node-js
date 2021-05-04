@@ -1,0 +1,58 @@
+<%- include('../../components/header.ejs') %>
+<%- include('../../components/navbar.ejs') %>
+
+<div class="container">
+    <hr>
+    <div class="card">
+        <div class="card-header">
+            <h2>Edit article</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/articles/update">
+                <input type="hidden" value="<%= article.id %>" name="id">
+                <input class="form-control" type="text" name="title" placeholder="Define a article title" value="<%= article.title %>">
+                <br>
+                <textarea class="form-control" placeholder="Write your article" name="body" id="article"></textarea>
+                <br>
+                <label>Category</label>
+                <select name="category" class="form-control"> 
+                    <% categories.forEach((category) => { %>
+                        <% if(category.id == article.categoryId) { %>
+                            <option value="<%= category.id %>" selected><%= category.title %></option>
+                        <% } else { %> 
+                            <option value="<%= category.id %>"><%= category.title %></option>
+                        <% } %>
+                    <% }) %>
+                </select>
+                <br>
+                <button class="btn btn-primary">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="content" style="display: none;">
+    <%- article.body %>
+</div>
+
+<%- include('../../components/footer.ejs') %>
+
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+// Instalando o TinyMCE -> usamos um id no text area, e carregamos o script da pasta
+    
+    tinymce.init({
+        selector: "#article", // adicione poderes a essa text area
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount emoticons insertdatetime media save table past'
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html()); // seto o valor no tiny mce carregado.
+        }
+    });
+    
+// doc tinymce https://www.tiny.cloud/docs/plugins/opensource/emoticons/
+    
+</script>
+    

@@ -1,0 +1,45 @@
+<%- include('../../components/header.ejs') %>
+<%- include('../../homenavbar.ejs') %>
+<body>
+    <div style="text-align: center;" class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+        <div style="margin-left: 24vw;" class="col-md-6 px-0">
+            <h1 style="text-align: center;" class="display-4 fst-italic">Simple portfolio</h1>
+            <p style="text-align: center;" class="lead my-3">Produced by Victor Luiz</p>
+            <p style="text-align: center;" class="lead mb-0">
+                <a href="/documentation" class="text white fw-bold">Documentation</a>
+            </p>
+        </div>
+    </div>
+    <div style="margin-left: 25vw;" class="col-md-6">
+        <% result.articles.rows.forEach(article => { %>
+        <div class="row mb-2 row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+                <strong class="d-inline-block mb-2 text-primary">Developer</strong>
+                <h3 class="mb-0"><%= article.title %></h3>
+                <div class="mb-1 text-muted"><%= article.createdAt.toUTCString() %></div>
+                <p class="card-text mb-auto">
+                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                </p>
+                <a href="/<%= article.slug %>" class="stretched-link">
+                    Continue reading
+                </a>
+            </div>
+        </div>
+        <% }) %>
+        <div class="row">
+            <div class="col col-12">
+                
+                <% if(result.page > 2) { %> 
+                    <a style="float: left;" href="/articles/page/<%= result.page - 1 %>">Prev</a>
+                <% } else if(result.page == 2) { %>
+                    <a style="float: left;" href="/">Prev</a>
+                <% } %>
+
+                <% if(result.next) { %> 
+                    <a style="float: right;" href="/articles/page/<%= result.page + 1 %>">Next</a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</body>
+<%- include('../../components/footer.ejs') %>
