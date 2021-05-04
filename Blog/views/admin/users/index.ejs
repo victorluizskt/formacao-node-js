@@ -1,0 +1,25 @@
+<%- include('../../components/header.ejs') %>
+<%- include('../../components/navbar.ejs') %>
+<div class="container">
+    <hr>
+    <h2>Users</h2>
+    <a class="btn btn-primary" href="/admin/users/create">Create new user</a>
+    <hr>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.id %></td>
+                    <td><%= user.email %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</div>
+<%- include('../../components/footer.ejs') %>

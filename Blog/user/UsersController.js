@@ -3,8 +3,11 @@ const router = express.Router();
 const User = require("./User");
 const bcryptjs = require("bcryptjs");
 
+// fazer edição de users também
 router.get("/admin/users", (request, response) => {
-    response.send("Listagem de usuários")
+    User.findAll().then(users => {
+        response.render("admin/users/index", {users: users});
+    });
 });
 
 router.get("/admin/users/create", (request, response) => {
