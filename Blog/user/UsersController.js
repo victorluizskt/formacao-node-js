@@ -10,4 +10,11 @@ router.get("/admin/users/create", (request, response) => {
     response.render("admin/users/create");
 });
 
+router.post("/users/create", (request, response) => {
+    const email = request.body.email;
+    const password = request.body.password;
+
+    return response.json({email, password});
+});
+
 module.exports = router;
