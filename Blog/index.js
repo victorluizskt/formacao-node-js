@@ -8,9 +8,16 @@ const Article = require('./articles/Article');
 const Category = require('./categories/Category');
 const usersController = require("./user/UsersController");
 const User = require("./user/User");
+const session = require('express-session');
 
 // view engine
 app.set('view engine', 'ejs');
+
+//sessions
+app.use(session({
+    // texto que o express session pede para aumentar a segurança das sessões, cooke: {maxAge: tempo de exp do cookie}
+    secret: "siadbasudbasiuduasdfasuidyfasdpasdn", cookie: {maxAge: 30000}
+}));
 
 // static
 app.use(express.static('public'));
