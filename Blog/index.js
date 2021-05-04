@@ -6,6 +6,8 @@ const categoriesController = require('./categories/CategoriesController');
 const articleController = require('./articles/ArticlesController');
 const Article = require('./articles/Article');
 const Category = require('./categories/Category');
+const usersController = require("./user/UsersController");
+const User = require("./user/User");
 
 // view engine
 app.set('view engine', 'ejs');
@@ -23,6 +25,7 @@ connection.authenticate().then(console.log('connection success')).catch(err => c
 // routes
 app.use('/', categoriesController);
 app.use('/', articleController);
+app.use('/', usersController);
 
 app.get('/', (request, response) => {
     Article.findAll({order: [['id', 'DESC']], limit: 2}).then(articles => {
