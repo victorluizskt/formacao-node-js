@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const connection = require('../database/database');
-
+// Mudar atributos do usuario, incluir mais atributos
+// Colocar validação de email
 
 const  User = connection.define('users', {
     email: {
