@@ -9,11 +9,14 @@ const Category = require('./categories/Category');
 const usersController = require("./user/UsersController");
 const User = require("./user/User");
 const session = require('express-session');
+const { response } = require('express');
 
 // view engine
 app.set('view engine', 'ejs');
 
+
 //sessions
+// redis -> muda o storage para outro banco, para que assim n estoure a memoria do server
 app.use(session({
     // texto que o express session pede para aumentar a segurança das sessões, cooke: {maxAge: tempo de exp do cookie}
     secret: "siadbasudbasiuduasdfasuidyfasdpasdn", cookie: {maxAge: 30000}
@@ -33,6 +36,23 @@ connection.authenticate().then(console.log('connection success')).catch(err => c
 app.use('/', categoriesController);
 app.use('/', articleController);
 app.use('/', usersController);
+
+// dados sendo salvos na aplicação da minha sessão
+app.get('/session', (request, response) => {
+    request.session.treinamento = "Formação node.js";
+    request.session.ano = 2019;
+    request.session.email = "victorluiz@cefetmg.br";
+    response.send("Sessão gerada.")
+});
+
+// acessando os dados
+app.get('/read', (request, response) => {
+    return response.json({
+        treinamento: request.session.treinamento,
+        ano: request.session.ano,
+        email: request.session.email
+    });
+});
 
 app.get('/', (request, response) => {
     Article.findAll({order: [['id', 'DESC']], limit: 2}).then(articles => {
