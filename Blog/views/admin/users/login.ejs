@@ -1,0 +1,18 @@
+<%- include('../../components/header.ejs') %>
+<%- include('../../components/navbar.ejs') %>
+<div class="container">
+     <hr>
+    <div class="card mt-4">
+        <div class="card-header">
+            <h2>Login for admin</h2>
+        </div>
+        <div class="card-body">
+            <form action="/authenticate" method="POST">
+                <input class="form-control" name="email" type="email" placeholder="email@exemplo.com"><br>
+                <input class="form-control" name="password" type="password" placeholder="**********"><br>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('../../components/footer.ejs') %>

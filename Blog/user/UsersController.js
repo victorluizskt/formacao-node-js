@@ -14,6 +14,31 @@ router.get("/admin/users/create", (request, response) => {
     response.render("admin/users/create");
 });
 
+router.get("/login", (request, response) => {
+    response.render("admin/users/login")
+});
+
+router.post("/authenticate", (request, response) => {
+    const email = request.body.email;
+    const password = request.body.password;
+
+    User.findOne({where:{email: email}}).then(user => {
+        if(user != undefined){
+            //  validar senha
+            const correct = bcryptjs.compareSync(password, user.password);
+            if(correct){
+                request.session.user = {
+                    id: user.id,
+                    email: user.email
+                }
+                response.json(request.session.user);
+            }
+            // colocar erro na tela
+            response.redirect("/login");
+        } 
+    });
+})
+
 router.post("/users/create", (request, response) => {
     // fazer validações e etc
     const email = request.body.email;
