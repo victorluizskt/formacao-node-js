@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const User = require("./User");
 const bcryptjs = require("bcryptjs");
+const { response } = require("express");
 
 // fazer edição de users também
 router.get("/admin/users", (request, response) => {
@@ -60,8 +61,11 @@ router.post("/users/create", (request, response) => {
             response.redirect("/admin/users/create")
         }
     })
-
-   
 });
+
+router.get("/logout", (request, response) => {
+    request.session.user = undefined;
+    response.redirect("/")
+})
 
 module.exports = router;
