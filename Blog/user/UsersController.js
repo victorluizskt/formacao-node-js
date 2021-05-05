@@ -31,7 +31,8 @@ router.post("/authenticate", (request, response) => {
                     id: user.id,
                     email: user.email
                 }
-                response.json(request.session.user);
+                // colocar success
+               response.redirect("/admin/articles");
             }
             // colocar erro na tela
             response.redirect("/login");

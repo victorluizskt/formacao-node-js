@@ -9,7 +9,7 @@ const Category = require('./categories/Category');
 const usersController = require("./user/UsersController");
 const User = require("./user/User");
 const session = require('express-session');
-const { response } = require('express');
+// adicionar middlewares no restante dos admins
 
 // view engine
 app.set('view engine', 'ejs');
@@ -19,7 +19,7 @@ app.set('view engine', 'ejs');
 // redis -> muda o storage para outro banco, para que assim n estoure a memoria do server
 app.use(session({
     // texto que o express session pede para aumentar a segurança das sessões, cooke: {maxAge: tempo de exp do cookie}
-    secret: "siadbasudbasiuduasdfasuidyfasdpasdn", cookie: {maxAge: 30000}
+    secret: "siadbasudbasiuduasdfasuidyfasdpasdn", cookie: {maxAge: 30000000}
 }));
 
 // static
