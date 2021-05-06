@@ -1,10 +1,24 @@
 const Sequelize = require('sequelize');
 const connection = require('../database/database');
-// Mudar atributos do usuario, incluir mais atributos
-// Colocar validação de email
-// trabalhar com foto de perfil
+
 
 const  User = connection.define('users', {
+    profile_pic: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    surname: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    telephone: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false
@@ -15,6 +29,6 @@ const  User = connection.define('users', {
      }
 });
 
-// User.sync({force: true});
+//User.sync({force: true});
 
 module.exports = User;
