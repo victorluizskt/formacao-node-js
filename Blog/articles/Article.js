@@ -11,6 +11,7 @@ const Article = connection.define('article', {
          type: Sequelize.STRING,
          allowNull: false
      },
+     // Mudar para text, para que o banco de dados aceite valores maiores de texto e não 256
      body: {
          type: Sequelize.STRING,
          allowNull: false,

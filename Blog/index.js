@@ -10,6 +10,10 @@ const usersController = require("./user/UsersController");
 const User = require("./user/User");
 const session = require('express-session');
 // adicionar middlewares no restante dos admins
+// refatorar melhor o código para que assim, o mesmo fique bem organizado e de fácil entendimento
+// nomes mais bacanas p as variaveis
+// comentar cada trecho do codigo
+// separar back e front end
 
 // view engine
 app.set('view engine', 'ejs');
@@ -37,23 +41,25 @@ app.use('/', categoriesController);
 app.use('/', articleController);
 app.use('/', usersController);
 
-// dados sendo salvos na aplicação da minha sessão
-app.get('/session', (request, response) => {
-    request.session.treinamento = "Formação node.js";
-    request.session.ano = 2019;
-    request.session.email = "victorluiz@cefetmg.br";
-    response.send("Sessão gerada.")
-});
+// Usando o session
+// // dados sendo salvos na aplicação da minha sessão
+// app.get('/session', (request, response) => {
+//     request.session.treinamento = "Formação node.js";
+//     request.session.ano = 2019;
+//     request.session.email = "victorluiz@cefetmg.br";
+//     response.send("Sessão gerada.")
+// });
 
-// acessando os dados
-app.get('/read', (request, response) => {
-    return response.json({
-        treinamento: request.session.treinamento,
-        ano: request.session.ano,
-        email: request.session.email
-    });
-});
+// // acessando os dados
+// app.get('/read', (request, response) => {
+//     return response.json({
+//         treinamento: request.session.treinamento,
+//         ano: request.session.ano,
+//         email: request.session.email
+//     });
+// });
 
+// rota principal limitando a quantidade de item por pagina, mudar futuramente p 4
 app.get('/', (request, response) => {
     Article.findAll({order: [['id', 'DESC']], limit: 2}).then(articles => {
         Category.findAll().then(categories => {
@@ -62,6 +68,7 @@ app.get('/', (request, response) => {
     });
 });
 
+// rota principal q é usada para pegar o paramêtro p construir a url da pagina
 app.get("/:slug", (request, response) => {
     const slug = request.params.slug;
     Article.findOne({
@@ -79,6 +86,7 @@ app.get("/:slug", (request, response) => {
     }).catch(err => { response.redirect("/") });
 });
 
+// responsavel por mostrar uma categoria especifica
 app.get("/category/:slug", (request, response) => {
     const slug = request.params.slug;
     Category.findOne({
